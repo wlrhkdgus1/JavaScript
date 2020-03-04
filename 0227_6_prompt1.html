@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+</head>
+<body>
+    <script>
+        id = prompt('아이디를 입력해주세요.');
+        password = prompt('비밀번호를 입력해주세요.');
+        if(id=='egoing' && password=='111111'){
+            alert('인증 했습니다.');
+        } else {
+            alert('인증에 실패 했습니다.');
+        }
+ //중첩된 if문을 하나로 줄였다. 덕분에 코드의 복잡성도 낮아졌다. &&는 아래와 같은 의미를 만든다.
+
+//"id의 값이 egoing이고 password의 값이 111111이면 참이다"
+
+//즉 && 연산자의 좌항과 우항이 모두 참일 때 전체가 참이 되는 것이다.
+
+    </script>
+</body>
+</html>
