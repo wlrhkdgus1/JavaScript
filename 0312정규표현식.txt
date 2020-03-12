@@ -1,0 +1,151 @@
+정규표현식
+정규표현식(Regular Expression)은 문자열을 처리하는 방법 중의 하나로 특정한 조건의 문자를 '검색'하거나 '치환'하는 과정을 매우 간편하게 처리 할 수 있도록 하는 수단이다.
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+정규표현식 리터럴                정규표현식 객체 생성자
+var pattern = /a/;                   =                  var pattern = new RegExp('a');
+
+
+
+두가지 모두 같은결과를 만들어 내지만 장점과 단점이 다르다.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+RegExp.exec()
+var pattern = /a/;                   =                 var pattern = new RegExp('a');
+
+
+
+console.log(pattern.exec('abcdef')); // ["a"]
+
+실행결과는 문자열 a를 값으로 하는 배열을 리턴한다.
+
+
+
+console.log(pattern.exec('bcdefg')); // null
+
+인자 'bcdef'에는 a가 없기 때문에 null을 리턴한다.
+
+RegExp.test()
+test는 인자 안에 패턴에 해당되는 문자열이 있으면 true, 없으면 false를 리턴한다.
+
+
+
+console.log(pattern.test('abcdef')); // true
+
+cnosole.log(pattern.test('bcdefg')); // false
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+String.match()
+RegExp.exec()와 비슷하다.
+
+
+
+console.log('abcdef'.match(pattern)); // ["a"]
+
+console.log('bcdefg'.match(pattern)); // null
+
+String.replace()
+문자열에서 패턴을 검색해서 이를 변경한 후에 변경된 값을 리턴한다.
+
+
+
+console.log('abcdef'.replace(pattern, 'A'));
+
+// Abcdef
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+i
+i를 붙이면 대소문자를 구분하지 않는다.
+
+
+
+var xi = /a/;
+
+console.log("Abcde".match(xi)); // null
+
+var oi = /a/i;
+
+console.log("Abcde".match(oi)); // ["A"];
+
+
+
+g
+g를 붙이면 검색된 모든 결과를 리턴한다.
+
+
+
+var xg = /a/;
+
+console.log("abcdea".match(xg)); // ["a"]
+
+var og = /a/g;
+
+console.log("abcdea".match(og)); // ["a" , "a"]
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+
+괄호안의 패턴은 마치 변수처럼 재사용할 수 있다. 이 때 기호 $를 사용하는데 아래 코드는 coding과 everybody의 순서를 역전시킨다.
+
+
+
+var pattern = /(\w+)\s(\w+)/;
+
+var str = "coding everybody";
+
+var result = str.replace(pattern, "$2, $1");
+
+console.log(result);
+
+
+
+결과값 : everybody, coding
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+치환 = 이부분은 따로 공부를 더 해야될것 같음.
+아래 코드는 본문 중의 URL을 링크 html 태그로 교체한다. 
+
+
+
+var urlPattern = /\b(?:https?):\/\/[a-z0-9-+&@#\/%?=~_|!:,.;]*/gim;
+
+var content = '생활코딩 : http://opentutorials.org/course/1 입니다. 네이버 : http://naver.com 입니다. ';
+
+var result = content.replace(urlPattern, function(url){
+
+      return '<a href="'+url+'">'+url+'</a>';
+
+});
+
+console.log(result);
+
+
+
+결과값 ; 생활코딩 : <a href="http://opentutorials.org/course/1">http://opentutorials.org/course/1> 입니다. 네이버 : <a href="http://naver.com">http://naver.com> 입니다.﻿
+
+
+
+
+
