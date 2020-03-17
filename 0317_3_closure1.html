@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <script>
+
+//var arr = []
+//for(var i = 0; i < 5; i++){
+//    arr[i] = function(){
+//        return i;
+//   }
+//}
+//for(var index in arr) {
+//    console.log(arr[index]());
+//}
+// 결과값 : 5 5 5 5 5 
+//위의 코드는 아래와 같이 변경해야 한다.
+var arr = []
+for(var i = 0; i < 5; i++){
+    arr[i] = function(id) {
+        return function(){
+            return id;
+        }
+    }(i);
+}
+for(var index in arr) {
+    console.log(arr[index]());
+}
+//결과값 : 0 1 2 3 4 
+
+
+    </script>
+    
+</body>
+</html>
